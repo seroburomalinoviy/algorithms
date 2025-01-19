@@ -24,7 +24,6 @@ class DataLoader:
 
 
 loader = DataLoader("some_source")
-
 print("До обращения к data")
 print(loader.data)
 print("После обращения к data")
