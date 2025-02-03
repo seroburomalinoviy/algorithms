@@ -13,9 +13,9 @@ def extract():
     connection = sqlite3.connect("db.sqlite")
     cursor = connection.cursor()
 
-    # РќР°РІРµСЂРЅСЏРєР° СЌС‚Рѕ РїРёР»РёС‚СЃСЏ РІ РѕРґРёРЅ sql - Р·Р°РїСЂРѕСЃ, РЅРѕ РјРЅРµ РєР°Рє-С‚Рѕ Р»РµРЅРёРІРѕ)
+    # Наверняка это пилится в один sql - запрос, но мне как-то лениво)
 
-    # РџРѕР»СѓС‡Р°РµРј РІСЃРµ РїРѕР»СЏ РґР»СЏ РёРЅРґРµРєСЃР°, РєСЂРѕРјРµ СЃРїРёСЃРєР° Р°РєС‚РµСЂРѕРІ Рё СЃС†РµРЅР°СЂРёСЃС‚РѕРІ, РґР»СЏ РЅРёС… С‚РѕР»СЊРєРѕ id
+    # Получаем все поля для индекса, кроме списка актеров и сценаристов, для них только id
     cursor.execute("""
         select id, imdb_rating, genre, title, plot, director,
         -- comma-separated actor_id's
@@ -37,7 +37,7 @@ def extract():
     # cursor.execute('pragma table_info(movies)')
     # pprint(cursor.fetchall())
 
-    # РќСѓР¶РЅС‹ РґР»СЏ СЃРѕРѕС‚РІРµС‚СЃРІРёСЏ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂР° Рё С‡РµР»РѕРІРµРєРѕС‡РёС‚Р°РµРјРѕРіРѕ РЅР°Р·РІР°РЅРёСЏ
+    # Нужны для соответсвия идентификатора и человекочитаемого названия
     actors = {row[0]: row[1] for row in cursor.execute('select * from actors where name != "N/A"')}
     writers = {row[0]: row[1] for row in cursor.execute('select * from writers where name != "N/A"')}
 
@@ -54,7 +54,7 @@ def transform(__actors, __writers, __raw_data):
     """
     documents_list = []
     for movie_info in __raw_data:
-        # Р Р°Р·С‹РјРµРЅРѕРІР°РЅРёРµ СЃРїРёСЃРєР°
+        # Разыменование списка
         movie_id, imdb_rating, genre, title, description, director, raw_actors, raw_writers = movie_info
 
         if raw_writers[0] == '[':
