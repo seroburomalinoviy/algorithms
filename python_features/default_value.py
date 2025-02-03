@@ -1,3 +1,5 @@
+from collections import defaultdict
+
 def func(x=[0]):
     """
     список - изменяемый тип данных
