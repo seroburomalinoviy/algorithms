@@ -178,6 +178,11 @@ class UpgradedLinkedList:
         self.length = 0
 
     def append(self, value):
+        """
+        O(1)
+        :param value:
+        :return:
+        """
         if self.tail is None or self.head is None:
             current_node = Node(value)
             self.head = current_node
@@ -190,6 +195,11 @@ class UpgradedLinkedList:
         self.length += 1
 
     def prepend(self, value):
+        """
+        O(1)
+        :param value:
+        :return:
+        """
         if self.tail is None or self.head is None:
             current_node = Node(value)
             self.head = current_node
@@ -202,6 +212,11 @@ class UpgradedLinkedList:
         self.length += 1
 
     def delete(self, value):
+        """
+        O(n)
+        :param value:
+        :return:
+        """
         node = self.head
         while node:
             if node.value == value:
@@ -219,6 +234,12 @@ class UpgradedLinkedList:
             node = node.next_node
 
     def insert(self, index, value):
+        """
+        O(n)
+        :param index:
+        :param value:
+        :return:
+        """
         counter = 0
         node = self.head
         while node:
@@ -243,6 +264,10 @@ class UpgradedLinkedList:
         raise IndexError("Out of range")
 
     def reverse(self):
+        """
+        O(n)
+        :return:
+        """
         i, j = self.head, self.tail
         i_counter = 0
         while i_counter < self.length // 2:
@@ -252,6 +277,10 @@ class UpgradedLinkedList:
             i_counter += 1
 
     def clear(self):
+        """
+        O(1)
+        :return:
+        """
         self.head = None
         self.tail = None
         self.length = 0
