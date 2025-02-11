@@ -3,11 +3,11 @@ class LazyProperty:
         self.func = func
         self.name = func.__name__
 
-    def __get__(self, obj, cls):
-        if obj is None:
+    def __get__(self, instance, owner):
+        if instance is None:
             return self
-        value = self.func(obj)
-        setattr(obj, self.name, value)
+        value = self.func(instance)
+        setattr(instance, self.name, value)
         return value
 
 

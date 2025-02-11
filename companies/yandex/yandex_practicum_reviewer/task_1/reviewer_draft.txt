@@ -14,7 +14,7 @@ load(transform(*extract()))
 на Хабр:
 https://habr.com/ru/articles/710106/
 
-2. Аннотация типов
+2. Оформление кода
 Функция extract возвращает разнородные данные, в данном случае аннотация крайне важна для читаемости кода.
 Я бы предложил написать так:
 """
@@ -35,7 +35,6 @@ https://peps.python.org/pep-0008/#method-names-and-instance-variables
 def transform(actors: dict[str, Any], writers: dict[str, Any], raw_data: list[tuple]):
 """
 
-3. Dockstring
 Здорово, что используешь dockstring при написании функций. Также лучше добавлять
  хотя бы краткое описание во всю свю документацию, как сделано в функции extract().
 
