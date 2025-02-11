@@ -73,7 +73,7 @@ class Node:
         self.value = value
 
     def __repr__(self):
-        return f"Node({self.value}, {self.next_node}, {self.prev_node})"
+        return f"Node({self.value})"
 
 
 
@@ -175,6 +175,7 @@ class UpgradedLinkedList:
     def __init__(self):
         self.head = None
         self.tail = None
+        self.length = 0
 
     def append(self, value):
         if self.tail is None or self.head is None:
@@ -186,6 +187,7 @@ class UpgradedLinkedList:
             current_node = Node(value, None, last_node)
             last_node.next_node = current_node
             self.tail = current_node
+        self.length += 1
 
     def prepend(self, value):
         if self.tail is None or self.head is None:
@@ -197,6 +199,7 @@ class UpgradedLinkedList:
             current_node = Node(value, first_node, None)
             first_node.prev_node = current_node
             self.head = current_node
+        self.length += 1
 
     def delete(self, value):
         node = self.head
@@ -211,6 +214,7 @@ class UpgradedLinkedList:
                     prev_node = node.prev_node
                     next_node.prev_node = prev_node
                     prev_node.next_node = next_node
+                self.length -= 1
                 return
             node = node.next_node
 
@@ -228,20 +232,32 @@ class UpgradedLinkedList:
                     prev_node.next_node = current_node
                     last_node.prev_node = current_node
                 else:
-                    next_node = node.next_node
-                    new_node = Node(value, node.next_node, node)
-                    node.next_node = new_node
-                    next_node.prev_node = new_node
+                    prev_node = node.prev_node
+                    new_node = Node(value, node, prev_node)
+                    prev_node.next_node = new_node
+                    node.prev_node = new_node
+                self.length += 1
                 return
             counter += 1
             node = node.next_node
+        raise IndexError("Out of range")
 
     def reverse(self):
-        pass
+        i, j = self.head, self.tail
+        i_counter = 0
+        while i_counter < self.length // 2:
+            i.value, j.value = j.value, i.value
+            i = i.next_node
+            j = j.prev_node
+            i_counter += 1
 
     def clear(self):
         self.head = None
         self.tail = None
+        self.length = 0
+
+    def len(self):
+        return f"Length: {self.length}"
 
     def show(self):
         node = self.head
@@ -253,7 +269,14 @@ class UpgradedLinkedList:
 updll = UpgradedLinkedList()
 updll.append(1)
 updll.append(3)
+updll.append(4)
+updll.append(5)
+updll.append(6)
 updll.insert(1, 2)
+updll.prepend(0)
+updll.reverse()
+updll.delete(6)
+print(updll.len())
 updll.show()
 
 
