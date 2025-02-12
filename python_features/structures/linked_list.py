@@ -308,5 +308,41 @@ updll.delete(6)
 print(updll.len())
 updll.show()
 
+print(type(updll))
+
+
+class CircleLinkedList:
+    """
+    Последний узел указывает на первый узел
+    """
+    def __init__(self, value):
+        self.node = Node(value)
+        self.head = self.node
+        self.tail = self.node
+        self.length = 0
+
+    def append(self, value):
+        last_node = self.tail
+        current_node = Node(value, self.head, last_node)
+        last_node.next_node = current_node
+        self.tail = current_node
+        self.length += 1
+
+    def show(self):
+        node = self.head
+        i = 0
+        while i < self.length + 5:
+            print(node.value)
+            node = node.next_node
+            i += 1
+
+
+cll = CircleLinkedList(1)
+cll.append(2)
+cll.append(3)
+cll.show()
+
+
+
 
 
