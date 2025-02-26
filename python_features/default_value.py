@@ -24,5 +24,5 @@ def func2(x, lst=[]):
 
 
 func2(1)
-func2(2, [])
+func2(2)
 func2(3)
