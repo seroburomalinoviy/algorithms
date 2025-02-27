@@ -38,6 +38,12 @@ PHYS
 
 QUANTUM PHYSICS
 
+Провальный тест на:
+46663633338
+3
+GOOD
+GREAT
+MEET
 
 
 """
@@ -50,9 +56,9 @@ def main():
     """
     s = input()
     n = int(input())
-    phinik_words = []
+    phinik_words = set()  # используем множество для быстрого поиска
     for _ in range(n):
-        phinik_words.append(input())
+        phinik_words.add(input())
 
     words = {
         "1": ["-"],
@@ -118,6 +124,7 @@ def main():
             letter.append(s[i])
 
     answer.append(prev_candidate)
+    print(answer)
 
     return " ".join(answer)
 
